@@ -99,7 +99,7 @@ public class Thongtincongty {
     }
 
     public String toTSVLine() {
-        return congty + "\t"
+        return (congty + "\t"
                 + tengiaodich + "\t"
                 + masothue + "\t"
                 + diachi + "\t"
@@ -107,7 +107,7 @@ public class Thongtincongty {
                 + ngaycapgiayphep + "\t"
                 + ngayhoatdong + "\t"
                 + dienthoai + "\t"
-                + nganhnghekinhdoanh;
+                + nganhnghekinhdoanh).replaceAll("null", "");
     }
 
     public static Thongtincongty parseFromPageContent(URL url, String content) {
@@ -133,7 +133,21 @@ public class Thongtincongty {
             if (dienthoaiEncoded != null) {
                 data.dienthoai = OCR.detect(dienthoaiEncoded);
             }
-
+            
+            StringBuilder nganhnghe = new StringBuilder();
+            List<String> nganhngheList = TParser.getContentList(content, "<td class=\"col-md-9\">", "</td>");
+            if (nganhngheList != null) {
+                for (String s : nganhngheList) {
+                    if (nganhnghe.length() != 0) {
+                        nganhnghe.append(";");
+                    }
+                    if (s.startsWith("<strong>")) {
+                        s = TParser.getContent(s, "<strong>", "</strong>") + " (Chính)";
+                    }
+                    nganhnghe.append(s);
+                }
+            }
+            data.nganhnghekinhdoanh = nganhnghe.toString();
             return data;
         } catch (Exception e) {
             e.printStackTrace();

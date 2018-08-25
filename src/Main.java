@@ -4,10 +4,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
@@ -67,13 +71,13 @@ public class Main extends javax.swing.JFrame {
             }
 
             protected void updateFieldState() {
-                checkStateEnabled();
+                checkStartEnabled();
             }
         });
     }
 
-    private void checkStateEnabled() {
-        boolean enabled = searchLinkTextField.getText().startsWith("http://www.thongtincongty.com/") && output != null;
+    private void checkStartEnabled() {
+        boolean enabled = searchLinkTextField.getText().length() >= 3 && output != null;
         startButton.setEnabled(enabled);
     }
 
@@ -120,7 +124,12 @@ public class Main extends javax.swing.JFrame {
 
         final DefaultTableModel tableModel = (DefaultTableModel) dataTable.getModel();
         tableModel.setRowCount(0);
-        String url = searchLinkTextField.getText();
+        String url = null;
+        try {
+            url = "http://www.thongtincongty.com/search/" + URLEncoder.encode(searchLinkTextField.getText(), "UTF-8") + "/";
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         int numRecords;
         try {
@@ -258,8 +267,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        numberOfWorkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "4", "8", "16", "32", "64", "128" }));
-        numberOfWorkersComboBox.setSelectedIndex(4);
+        numberOfWorkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "4", "8", "16", "32" }));
+        numberOfWorkersComboBox.setSelectedIndex(3);
         numberOfWorkersComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numberOfWorkersComboBoxActionPerformed(evt);
@@ -323,7 +332,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(progressLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+                            .addComponent(dataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(outputFileButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -423,7 +432,7 @@ public class Main extends javax.swing.JFrame {
                 } else {
                     outputFileLabel.setText(outputName);
                 }
-                checkStateEnabled();
+                checkStartEnabled();
             }
         }
     }//GEN-LAST:event_outputFileButtonActionPerformed
