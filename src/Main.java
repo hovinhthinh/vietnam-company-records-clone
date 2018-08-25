@@ -256,7 +256,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        searchLinkLabel.setText("Search link: ");
+        searchLinkLabel.setText("Search query: ");
 
         outputFileLabel.setText("No chosen file");
 
