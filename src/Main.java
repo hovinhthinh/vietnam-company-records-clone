@@ -39,7 +39,7 @@ public class Main extends javax.swing.JFrame {
     private File output;
 
     /**
-     * Creates new form EmailChecker
+     * Creates new form
      */
     public Main() {
         initComponents();
@@ -77,7 +77,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void checkStartEnabled() {
-        boolean enabled = searchLinkTextField.getText().length() >= 3 && output != null;
+        boolean enabled = searchLinkTextField.getText().contains("http://www.thongtincongty.com/") && !searchLinkTextField.getText().contains("page=") && output != null;
         startButton.setEnabled(enabled);
     }
 
@@ -124,12 +124,7 @@ public class Main extends javax.swing.JFrame {
 
         final DefaultTableModel tableModel = (DefaultTableModel) dataTable.getModel();
         tableModel.setRowCount(0);
-        String url = null;
-        try {
-            url = "http://www.thongtincongty.com/search/" + URLEncoder.encode(searchLinkTextField.getText(), "UTF-8") + "/";
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String url = searchLinkTextField.getText();
 
         int numRecords;
         try {
@@ -154,10 +149,10 @@ public class Main extends javax.swing.JFrame {
             PrintWriter out = new PrintWriter(new OutputStreamWriter(new FileOutputStream(output), "UTF-8"));
             out.println(Thongtincongty.getTSVHeader());
             AtomicInteger pagesCount = new AtomicInteger(0);
-            
+
             for (int i = 1; i <= (totalRecords - 1) / 50 + 1; ++i) {
                 queue.push(new URL(url + "?page=" + i));
-            } 
+            }
 
             ArrayList<Thread> threads = new ArrayList<>();
 
@@ -256,7 +251,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        searchLinkLabel.setText("Search query: ");
+        searchLinkLabel.setText("Search link: ");
 
         outputFileLabel.setText("No chosen file");
 

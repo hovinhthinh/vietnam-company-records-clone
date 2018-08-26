@@ -3,17 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/vietnam-company-records-clone/src/util/Miscellaneous.java</file>
-            <file>file:/D:/vietnam-company-records-clone/src/Email.java</file>
-            <file>file:/D:/vietnam-company-records-clone/src/util/CollaborationQueue.java</file>
-            <file>file:/D:/vietnam-company-records-clone/src/site/Thongtincongty.java</file>
-            <file>file:/D:/vietnam-company-records-clone/src/util/TParser.java</file>
-            <file>file:/D:/vietnam-company-records-clone/src/Main.java</file>
-            <file>file:/D:/vietnam-company-records-clone/src/util/Crawler.java</file>
-            <file>file:/D:/vietnam-company-records-clone/src/util/Pair.java</file>
-            <file>file:/D:/vietnam-company-records-clone/src/Test.java</file>
-            <file>file:/D:/vietnam-company-records-clone/src/Worker.java</file>
-            <file>file:/D:/vietnam-company-records-clone/src/EmailChecker.java</file>
+            <file>file:/Users/hovinhthinh/vietnam-company-records-clone/src/site/Thongtincongty.java</file>
+            <file>file:/Users/hovinhthinh/vietnam-company-records-clone/src/Main.java</file>
+            <file>file:/Users/hovinhthinh/vietnam-company-records-clone/src/Worker.java</file>
+            <file>file:/Users/hovinhthinh/vietnam-company-records-clone/src/util/Pair.java</file>
+            <file>file:/Users/hovinhthinh/vietnam-company-records-clone/src/OCRTest.java</file>
         </group>
     </open-files>
 </project-private>
